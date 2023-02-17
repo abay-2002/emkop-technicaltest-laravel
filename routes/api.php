@@ -17,17 +17,8 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-// Read
-Route::get('/karyawan', function(){
-    $kry = Karyawan::get();
-    return $kry;
-});
-
-Route::post('/karyawan/delete/{id}', [
-    KaryawanController::class, 'delete_'
-]);
-
-ROUTE::post('/karyawan/insert', function(){
+// Create
+Route::post('/karyawan/insert', function(){
     $name = request("name");
     $dob = request("dob");
     $gender = request("gender");
@@ -40,9 +31,40 @@ ROUTE::post('/karyawan/insert', function(){
                 'department' => $department
         )
     );
-
     return redirect('http://localhost:3000/');
 });
+
+// Read
+Route::get('/karyawan', function(){
+    $kry = Karyawan::get();
+    return $kry;
+});
+
+// Update
+Route::post('/karyawan/update', function(){
+    $id = request("id");
+    $name = request("name");
+    $dob = request("dob");
+    $gender = request("gender");
+    $department = request("department");
+    DB::table('karyawan')
+    ->where('id', $id)  // temukan user berdasarkan id.
+    ->update(array(
+        'name' => $name,
+        'dob' => $dob,
+        'gender' => $gender,
+        'department' => $department
+    ));  // update the record in the DB. 
+    return redirect('http://localhost:3000/read-delete-update-search');
+});
+
+// Delete
+Route::post('/karyawan/delete/{id}', [
+    KaryawanController::class, 'delete_'
+]);
+
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
