@@ -60,8 +60,15 @@ class KaryawanController extends Controller
         return redirect('http://localhost:3000/read-delete-update-search');
     }
 
+    // read
     public function read_(){
         $kry = Karyawan::get();
         return $kry;
+    }
+
+    // search
+    public function search_($userId){
+        $kry = Karyawan::get()->where('id', $userId)->toArray();
+        return array_reverse($kry); 
     }
 }

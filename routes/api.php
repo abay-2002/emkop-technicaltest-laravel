@@ -38,10 +38,11 @@ Route::post('/karyawan/delete/{id}', [
 ]);
 
 // Search
-Route::get('/karyawan/search/{userId}', function($userId){
-    $kry = Karyawan::get()->where('id', $userId)->toArray();
-    return array_reverse($kry);    
-});
+Route::get('/karyawan/search/{userId}', [ 
+    KaryawanController::class, 'search_'
+    // $kry = Karyawan::get()->where('id', $userId)->toArray();
+    // return array_reverse($kry);    
+]);
 
 
 
