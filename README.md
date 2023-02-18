@@ -5,6 +5,7 @@ database tidak meggunakan database bawaan laravel tetapi meggunakan database cos
 client menggunakan http://localhost:3000/ (react default port)
 
 ### Running
+aktifkan server web server local e.g: Apache dan Database local e.g MAMP, WAMP, XAMPP, LAMP
 yarn install / npm install
 composer update 
 php artisan serve
