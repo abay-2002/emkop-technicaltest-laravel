@@ -3,3 +3,8 @@ database tidak meggunakan database bawaan laravel tetapi meggunakan database cos
 
 ### Client
 client menggunakan http://localhost:3000/ (react default port)
+
+### Running
+yarn install / npm install
+composer update 
+php artisan serve
