@@ -18,51 +18,30 @@ use Illuminate\Support\Facades\DB;
 */
 
 // Create
-Route::post('/karyawan/insert', function(){
-    $name = request("name");
-    $dob = request("dob");
-    $gender = request("gender");
-    $department = request("department");
-    DB::table('karyawan')->insert(
-        array(
-                'name' => $name,
-                'dob' => $dob,
-                'gender' => $gender,
-                'department' => $department
-        )
-    );
-    return redirect('http://localhost:3000/');
-});
+Route::post('/karyawan/insert', [
+    KaryawanController::class, 'create_'
+]);
 
 // Read
-Route::get('/karyawan', function(){
-    $kry = Karyawan::get();
-    return $kry;
-});
+Route::get('/karyawan',[
+    KaryawanController::class, 'read_'
+]);
 
 // Update
-Route::post('/karyawan/update', function(){
-    $id = request("id");
-    $name = request("name");
-    $dob = request("dob");
-    $gender = request("gender");
-    $department = request("department");
-    DB::table('karyawan')
-    ->where('id', $id)  // temukan user berdasarkan id.
-    ->update(array(
-        'name' => $name,
-        'dob' => $dob,
-        'gender' => $gender,
-        'department' => $department
-    ));  // update the record in the DB. 
-    return redirect('http://localhost:3000/read-delete-update-search');
-});
+Route::post('/karyawan/update', [
+    KaryawanController::class, 'update_'
+]);
 
 // Delete
 Route::post('/karyawan/delete/{id}', [
     KaryawanController::class, 'delete_'
 ]);
 
+// Search
+Route::get('/karyawan/search/{userId}', function($userId){
+    $kry = Karyawan::get()->where('id', $userId)->toArray();
+    return array_reverse($kry);    
+});
 
 
 
